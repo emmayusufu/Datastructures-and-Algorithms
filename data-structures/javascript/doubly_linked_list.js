@@ -56,9 +56,11 @@ class DoublyLinkedList {
   delete(value) {
     let current = this.head;
 
-    while (current.value !== value) {
+    while (current && current.value !== value) {
       current = current.next;
     }
+
+    if (!current) return;
 
     if (this.tail.value === current.value) {
       this.tail = this.tail.prev;
@@ -82,6 +84,6 @@ list.prepend(4);
 list.append(5);
 list.append(6);
 list.printForward();
-list.delete(2);
+list.delete(20);
 list.delete(1);
 list.printForward();
