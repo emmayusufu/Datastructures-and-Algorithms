@@ -1,21 +1,18 @@
 class Node {
-  data = null;
-  next = null;
-  prev = null;
-
-  constructor(data) {
+  constructor(value) {
+    this.value = value;
     this.next = null;
     this.prev = null;
-    this.data = data;
   }
 }
 
-class DoublyLinked {
+class DoublyLinkedList {
   head = null;
   tail = null;
+  length = 0;
 
-  append(data) {
-    let newNode = new Node(data);
+  append(value) {
+    const newNode = new Node(value);
     if (!this.head) {
       this.head = this.tail = newNode;
     } else {
@@ -25,9 +22,8 @@ class DoublyLinked {
     }
   }
 
-  prepend(data) {
-    let newNode = new Node(data);
-
+  prepend(value) {
+    const newNode = new Node(value);
     if (!this.head) {
       this.head = this.tail = newNode;
     } else {
@@ -39,63 +35,37 @@ class DoublyLinked {
 
   printForward() {
     let current = this.head;
-    const arr = [];
-
+    const list = [];
     while (current) {
-      arr.push(current.data);
+      list.push(current.value);
       current = current.next;
     }
-    console.log(arr.join("<=>"));
+    console.log(list.join("<=>"));
   }
 
   printReverse() {
     let current = this.tail;
-    const arr = [];
-
+    const list = [];
     while (current) {
-      arr.push(current.data);
+      list.push(current.value);
       current = current.prev;
     }
-
-    console.log(arr.join("<=>"));
+    console.log(list.join("<=>"));
   }
 
-  delete(data) {
-    if (!this.head) return;
-
-    let current = this.head;
-
-    while (current && current.data !== data) {
-      current = current.next;
-    }
-
-    if (!current) return;
-
-    if (current.data === this.head.data) {
-      this.head = current.next;
-      this.head.prev = null;
-    } else if (current.data === this.tail.data) {
-      this.tail = current.prev;
-      this.tail.next = null;
-    } else {
-      const pbd = current.prev;
-      const nbd = current.next;
-      pbd.next = nbd;
-      nbd.prev = pbd;
-    }
+  delete(value) {
+    // if()
   }
 }
 
-const dll = new DoublyLinked();
+const list = new DoublyLinkedList();
 
-dll.append(20);
-dll.prepend(10);
-dll.append(30);
-dll.append(40);
-dll.append(50);
-dll.append(60);
-dll.append(70);
+list.append(1);
+list.append(2);
+list.prepend(0);
+list.prepend(4);
+list.append(5);
+list.append(6);
 
-// dll.printReverse();
-dll.delete(10);
-dll.printForward();
+list.printForward();
+list.printReverse();
